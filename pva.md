@@ -4,27 +4,55 @@
 
 We leveren uiterlijk **zondag 11 oktober 2026** één volledig, netjes gestructureerd en foutloos uitvoerbaar Jupyter-notebook in. Het notebook bevat de EDA, evaluatie, alle verplichte modellen en ensembles, cross-validation, hyperparametertuning, minimaal twee passende technieken voor de sterk ongebalanceerde data, Kaggle-resultaten, een conclusie en advies, en correcte APA- en AI-bronvermeldingen.
 
-Onze interne einddatum is **vrijdag 9 oktober 2026**. Daardoor blijven 10 en 11 oktober beschikbaar voor controle en problemen bij de definitieve inlevering.
+Onze interne einddatum voor de inhoudelijke conceptversie is **vrijdag 9 oktober 2026**. Op 10 oktober controleren we de volledige uitvoering en maken we de definitieve versie. 11 oktober blijft de buffer voor noodzakelijke correcties en inlevering. Dit is een krappe planning: verplichte onderdelen afronden gaat nu vóór extra score-experimenten.
 
-## Huidige stand per 25 september 2026
+## Huidige stand per 8 oktober 2026
 
-De EDA en het evaluatiehoofdstuk hebben een eerste uitwerking. **3.1 en 3.2 staan klaar voor review**, maar zijn pas definitief afgerond na akkoord van de reviewer en het oplossen van diens bevindingen. De overige verplichte modellen, ensembles en de conclusie zijn nog niet uitgewerkt. Tijn maakte de oorspronkelijke EDA, 1.11 en de eerste KNN-uitwerking. Yorrick schreef **Belangrijkste Bevindingen** en breidde **Niet relevante kolommen** uit.
+De EDA, evaluatie, KNN, Logistic Regression, SVM en Decision Tree hebben een uitwerking. Random Forest heeft theorie en trainingscode, maar nog geen vastgelegde resultaten. **3.1 en 3.2 staan klaar voor review**, met concrete open punten hieronder. Gradient Boosted Decision Trees, XGBoost, het eigen ensemble en de conclusie zijn nog placeholders. Uitgewerkt betekent dus niet automatisch gecontroleerd of afgerond.
+
+De lange trainingscellen staan **bewust als Raw**, zodat ze tijdens het werken niet bij iedere Run All opnieuw trainen. Dat is geen onbedoelde fout. Wel moeten de definitieve code en resultaten straks reproduceerbaar zijn; zie de afspraken over de eindcontrole.
 
 | Onderdeel | Status | Huidige stand en nog te doen |
 | --- | --- | --- |
-| Mappen en data | Basis gereed | `train.csv`, `test.csv` en `sample_submission.csv` staan in `data/`. KNN-submissionbestanden staan in de projectmap. |
+| Mappen en data | Basis gereed | Train-, test- en voorbeeldsubmission staan in `data/`. Submissionbestanden voor KNN, LR, SVM en Tree zijn aanwezig. Leg ook de benodigde pakketversies vast. |
 | Team- en Kaggle-informatie | Minimumeis gehaald | Teamleden en Kaggle-accounts staan in het notebook. De eigen KNN-submission `submission_knn_threshold_fixed.csv` behaalde **F1 0,13071**, boven de vereiste 0,1. Bewaar ook bewijs van de Kaggle-score. |
 | Kolombeschrijvingen en EDA | Deels gereed | Basisstatistieken, verdelingen, correlaties, boxplots en aanvullende controles zijn aanwezig. Maak beschrijvingen van alle dummyvariabelen compleet en voeg ontbrekende targetgerichte analyses en datakwaliteitschecks toe. |
 | Opschonen en standaardiseren | Deels gereed | ID-verwijdering, dummyredundantie en standaardisatie zijn uitgewerkt. De schaalpipeline wordt gebruikt in de baseline en KNN. Herzie het verwijderen van woongebied: een niet-significante toets bewijst niet dat een kenmerk voor voorspelling nutteloos is. |
 | 2.1–2.3 Evaluatie | Uitgewerkt, review nodig | Gestratificeerde split/CV, metricformules, Logistic Regression-baseline en confusion matrix staan in het notebook. Verwijder de resterende placeholder in 2.1 en controleer de uitleg en uitvoer. |
 | 3.1 Algemene modelaanpak | Klaar voor review | Gedeelde 5-fold CV-, pipeline-, imbalance- en F1-aanpak is beschreven. Yorrick controleert of de aanpak bij elk later model consequent wordt toegepast. |
-| 3.2 K-Nearest Neighbors | Klaar voor review, bevindingen open | Geneste CV/tuning, twee resamplingopties, drempelplot, validatie-F1, confusion matrix, submission en resultaattekst zijn aanwezig. Vul de werking van KNN plus Euclidische en Manhattan-afstand met formule of voorbeeld aan. De submissioncel is nu uitgecommentarieerd terwijl oude uitvoer zichtbaar blijft; herstel dit voor de eindversie. |
-| Overige modellen en ensembles | Niet gestart | 3.3–3.7 bevatten placeholders. De Logistic Regression-baseline uit hoofdstuk 2 is nog geen volledige uitwerking van 3.3. |
-| Cross-validation, tuning en imbalance | Voor KNN uitgevoerd | KNN vergelijkt RandomOverSampler en RandomUnderSampler binnen de pipeline, met hyperparameters en drempel via CV. Pas dezelfde eisen nog toe op alle overige modellen en ensembles. |
+| 3.2 K-Nearest Neighbors | Klaar voor review | Werking, Euclidische/Manhattan-formules en een klein rekenvoorbeeld zijn toegevoegd. De submission gebruikt nu de juiste modelvariabele via de gedeelde functie. Review de inhoud en controleer na uitvoering de resultaten en nieuwe CSV. |
+| 3.3 Logistic Regression | Uitgewerkt, review nodig | Theorie, gradient-descentvoorbeeld, tuning en opgeslagen resultaten zijn aanwezig. Controleer of de ingestelde regularisatie werkelijk overeenkomt met `l1_ratio` en de gebruikte scikit-learn-versie. Controleer daarna parameters, uitvoer en submission. |
+| 3.4 SVM | Theorie aangevuld, volledige training nog nodig | Het rekenvoorbeeld gebruikt drie gecontroleerde datasetrijen; de voorbeeldgewichten zijn duidelijk onderscheiden van getrainde gewichten. Labels −1/+1, hinge loss en beslissingsscore zijn verduidelijkt. Code voor beste parameters, drempel, CV-F1, validatiemetrics en confusion matrix is aanwezig. De volledige SVM-gridsearch is bij deze wijziging niet uitgevoerd; definitieve getallen blijven dus open. |
+| 3.5 Decision Tree | Uitgewerkt, resultaten controleren | Theorie, pruning en trainingscode zijn aanwezig. Leg de daadwerkelijk gekozen parameters, CV-score, lokale metrics en confusion matrix vast en koppel deze aan de submission. |
+| 3.6.1 Random Forest | Theorie en code aanwezig | Controleer de uitleg van voorspellingen: scikit-learn middelt de kansen van de bomen. Training, resultaten, imbalance-vergelijking en Kaggle-submission moeten nog worden afgerond. |
+| 3.6.2, 3.6.3 en 3.7 | Nog uit te werken | Gradient Boosted Decision Trees, XGBoost en een eigen ensemble van minimaal drie modellen bevatten nog placeholders. Theorie, code, tuning, resultaten en submissions ontbreken. |
+| Cross-validation, tuning en imbalance | Aanpak aanwezig, vergelijking incompleet | KNN is lokaal reproduceerbaar gecontroleerd. Ook LR, SVM, Tree en RF hebben tuningcode. Rapporteer per model de vergelijking van minimaal twee imbalance-technieken, beste parameters en CV-resultaten; alleen de winnende sampler noemen is onvoldoende. |
 | Conclusie en advies | Niet gestart | Modelvergelijking, beste-modelkeuze, bredere afwegingen en advies aan artsen ontbreken. |
-| Codekwaliteit en reproduceerbaarheid | Review nodig | Meerdere cellen zijn uitgevoerd, maar de KNN-submissioncel heeft uitgecommentarieerde code en nog opgeslagen uitvoer. Voer het volledige notebook later vanaf een schone kernel uit en controleer de volgorde, resultaten en PEP8. |
+| Codekwaliteit en reproduceerbaarheid | Gedeelde functies toegevoegd, eindcontrole nodig | `toon_resultaten` toont modelinstellingen en alle validatiemetrics. `maak_submission` hertraint de gekozen pipeline, houdt de drempel vast en controleert features, klassen en id-volgorde. KNN/LR/SVM/Tree hebben korte aanroepen in Raw-cellen; oude uitvoer van die submissioncellen en de KNN-KeyboardInterrupt zijn verwijderd. Nieuwe CSV-namen eindigen op `_nieuw`; bestaande Kaggle-bestanden blijven behouden. Een volledige schone run blijft nodig. |
 | Bronvermelding en AI-verantwoording | Deels gereed | Technische bronnen zijn toegevoegd; promptnummers, gedeelde links en de volledige APA- en AI-verantwoording zijn nog niet af. |
-| README | Bijgewerkt | Bevat nu de voortgang, de behaalde Kaggle-score en de belangrijkste resterende onderdelen. |
+| README | Later actualiseren | Werk na afronding de voortgang en uitvoerinstructies bij. Het README is met deze PvA-update niet aangepast. |
+
+### Controle van de aanvullingen op 8 oktober
+
+- KNN-afstandsformules en het rekenvoorbeeld zijn toegevoegd. Het SVM-voorbeeld gebruikt drie echte datasetrijen; scores en hinge loss zijn nagerekend.
+- De gedeelde resultaat-/submissionfuncties zijn getest met kleine runs voor KNN, SVM, Tree en RF op 300 datasetrijen. De tests controleren ook de vaste drempel en het weigeren van verkeerde features of id-volgorde. Dit zijn technische tests, geen definitieve modelscores.
+- Notebookstructuur en Python-syntax zijn gecontroleerd. Bestaande modelgrids en preprocessingkeuzes zijn niet veranderd. Er zijn bij deze wijziging geen nieuwe submission-CSV's aangemaakt en geen bestanden op Kaggle ingediend.
+- Nog open: volledige trainingen uitvoeren, definitieve uitvoer opslaan, nieuwe submissions controleren/indienen en AI-promptgegevens voor deze aanvullingen invullen. De volledige schone eindrun en onderlinge review blijven nodig.
+
+### Vastgelegde Kaggle-resultaten
+
+Dit zijn de public scores uit de aangeleverde Kaggle-resultaten, geen nieuwe metingen. De minimumscore geldt voor minimaal één eigen teammodel, niet voor ieder model afzonderlijk.
+
+| Submission | Public F1 |
+| --- | --- |
+| KNN, eerste versie | 0,09785 |
+| KNN, eerdere drempelversie | 0,04968 |
+| KNN, vaste gekozen drempel | **0,13071** |
+| Logistic Regression | 0,09352 |
+| SVM | 0,09497 |
+| Decision Tree | 0,07272 |
+
+KNN voldoet al aan de minimumscore. Voor de andere modellen blijft een volledige, eerlijke uitwerking vereist. Een hogere public score is geen bewijs dat een model geschikt is voor medische inzet.
 
 ## Werkverdeling
 
@@ -39,10 +67,10 @@ De eigenaar schrijft en test het onderdeel. De reviewer controleert de inhoud, c
 | 1.11 Standaardisatie                       | Tijn                  | Yorrick           | Theorie en basispipeline zijn toegevoegd; vul promptgegevens aan en gebruik de pipeline in latere schaalgevoelige modellen.                                        |
 | 2 Evaluatie                                | Tijn                  | Yorrick           | Eerste uitwerking en baseline zijn aanwezig. Review 2.1–2.3, verwijder de placeholder in 2.1 en controleer de getoonde metrics en confusion matrix. |
 | 3.1 Algemene modelaanpak                   | Tijn                  | Yorrick           | Tekst is klaar voor review. Controleer gedeelde pipeline, lekvrije CV/tuning-opzet en toepasbaarheid op alle modellen; Yorrick houdt het experiment- en Kaggle-log bij. |
-| 3.2 K-Nearest Neighbors                    | Tijn                  | Yorrick           | Code, tuning, validatie, confusion matrix en Kaggle-resultaat staan er. Review de methode en resultaten; vul afstandsformules/voorbeeld aan en herstel de uitgecommentarieerde submissioncel. |
-| 3.3 Logistic Regression                    | Yorrick               | Tijn              | Werking, loss, gradient descent, rekenvoorbeeld, regularisatie, tuning, imbalance en Kaggle-submission.                                                             |
-| 3.4 SVM                                    | Tijn                  | Yorrick           | Werking, formules, rekenvoorbeeld, kernels, loss, regularisatie, tuning, imbalance en Kaggle-submission.                                                            |
-| 3.5 Decision Tree                          | Yorrick               | Tijn              | Splitscriteria, pruning, underfitting/overfitting, tuning, imbalance en Kaggle-submission.                                                                          |
+| 3.2 K-Nearest Neighbors                    | Tijn                  | Yorrick           | Afstandsformules/voorbeeld en submissionkoppeling zijn aangevuld. Yorrick reviewt de uitwerking; Tijn controleert de resultaten en CSV na uitvoering. |
+| 3.3 Logistic Regression                    | Yorrick               | Tijn              | Bestaande theorie en code reviewen; pakketversie en regularisatie controleren; zo nodig opnieuw trainen en de resultaten/submission actualiseren. |
+| 3.4 SVM                                    | Tijn                  | Yorrick           | Rekenvoorbeeld en formule-uitleg staan er. Tijn voert de volledige training, resultaat-/matrixcellen en submission uit; Yorrick controleert theorie, instellingen en scoreherkomst. |
+| 3.5 Decision Tree                          | Yorrick               | Tijn              | Bestaande uitwerking reviewen; gekozen pruning/parameters, lokale resultaten, imbalance-vergelijking en submission vastleggen. |
 | 3.6.1 Random Forest                        | Tijn                  | Yorrick           | Bagging, parallelle training, tuning, imbalance en Kaggle-submission.                                                                                               |
 | 3.6.2 Gradient Boosted Decision Trees      | Yorrick               | Tijn              | Boosting, sequentiële training, tuning, imbalance en Kaggle-submission.                                                                                             |
 | 3.6.3 XGBoost                              | Yorrick               | Tijn              | Boosting, trainingstijd, tuning, imbalance en Kaggle-submission.                                                                                                    |
@@ -59,20 +87,25 @@ De eigenaar schrijft en test het onderdeel. De reviewer controleert de inhoud, c
 4. Bronnen en AI-prompts worden tijdens het schrijven toegevoegd, niet pas aan het einde.
 5. Voeg pas samen als het onderdeel zelfstandig draait en geen resultaten uit latere notebookcellen nodig heeft.
 
+### Omgaan met lange trainingsruns
+
+- Tijdens het werken mogen dure trainingscellen Raw blijven. Zet alleen de benodigde trainingscellen tijdelijk terug naar Code wanneer je een model opnieuw wilt trainen.
+- Noteer na een run de pakketversies, random seeds, beste parameters, gekozen drempel, CV-score, validatiemetrics en submissionbestandsnaam. Opgeslagen uitvoer moet bij de huidige code horen.
+- Voer eerst de imports, data/preprocessing, split en gedeelde functiecel onder 3.1 uit. Na een modeltraining toont `toon_resultaten` de actuele uitkomsten. Zet daarna de bijbehorende Raw-plot/matrix/submission naar Code en voer deze uit. De submissionfunctie traint opnieuw op alle ontwikkeldata, maar doet geen nieuwe drempelzoektocht.
+- Bestaande Kaggle-scores blijven gekoppeld aan de oude bestanden. Geef een nieuwe submission pas een score na daadwerkelijk indienen; testuitvoer op een kleine dataset telt niet als definitief modelresultaat.
+- Houd de grids klein en inhoudelijk onderbouwd. Geneste CV met drempeltuning vermenigvuldigt de rekentijd; start zware runs tijdig en voorkom onnodig tegelijk draaien op dezelfde computer.
+- Voor de definitieve versie zijn benodigde trainings- en submissioncellen uitvoerbaar. Plan op 10 oktober één volledige run vanaf een schone kernel, inclusief de lange training. Een Run All die Raw-training overslaat bewijst niet dat het hele notebook reproduceerbaar is.
+- Als die volledige run niet binnen de beschikbare tijd past, verklein de zoekruimte vóór de eindcontrole en rapporteer de opnieuw verkregen resultaten. Niet alleen oude uitvoer laten staan of verplichte modellen overslaan.
+
 ## Planning
 
 | Uiterlijk gereed                      | Werkzaamheden                             | Klaar wanneer                                                                                                                                                                                                                                                                       |
 | ------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **20 september**                      | Notebook herstructureren en werk verdelen | **Afgerond.** Structuur staat en werkverdeling is vastgelegd. |
-| **23 september**                      | EDA en preprocessing afronden             | **Deels afgerond.** Standaardisatie en aanvullende opschoningsanalyses zijn toegevoegd. Kolombeschrijvingen zijn aanwezig maar incompleet; bredere targetanalyses en validatie van featureverwijderingen resteren. Afronden uiterlijk 26 september. |
-| **25 september**                      | Evaluatiehoofdstuk en baseline afronden   | **Eerste uitwerking aanwezig.** Uiterlijk 26 september review van 2.1–2.3: placeholder verwijderen, berekeningen en interpretatie controleren en de baseline vanaf een schone kernel nalopen. |
-| **29 september**                      | KNN, Logistic Regression en SVM afronden  | **KNN en 3.1 staan ter review.** Rond hun reviewpunten af. Werk daarna 3.3 Logistic Regression en 3.4 SVM uit met vereiste theorie, CV, tuning, twee imbalance-aanpakken, validatie en Kaggle-resultaten. |
-| **1 oktober**                         | Decision Tree afronden                    | Splitscriteria, pruning, underfitting/overfitting, CV, tuning en imbalance-aanpakken zijn uitgewerkt en getest.                                                                                                                                                                     |
-| **4 oktober**                         | Alle ensembles afronden                   | Random Forest, Gradient Boosted Trees, XGBoost en een ensemble van minimaal drie modellen zijn uitgelegd, getuned en vergeleken. Bagging, boosting, sequential/parallel training en voting zijn correct behandeld.                                                                  |
-| **6 oktober**                         | Kaggle-fase afronden                      | **Minimum F1 0,1 is al gehaald met KNN (0,13071).** Pas van ieder overig verplicht model en ensemble de beste variant toe op `test.csv`, dien de eigen voorspellingen in en registreer alle lokale en Kaggle-scores. |
-| **8 oktober**                         | Conclusie, advies en bronnen afronden     | Vergelijkingstabel bevat alle modellen en ensembles; beste parameters en scores zijn vermeld; modelkeuze houdt naast prestatie ook rekening met uitlegbaarheid, foutkosten, bias en medische inzetbaarheid; APA-referentielijst en AI-verantwoording zijn compleet.                 |
-| **9 oktober**                         | Technische en inhoudelijke eindcontrole   | Notebook draait vanaf een schone kernel volledig van boven naar beneden zonder fouten; code is PEP8-conform en waar zinvol in functies/classes geplaatst; iedere groepsgenoot kan alle code en tekst toelichten.                                                                    |
-| **10 oktober**                        | Peer review en definitieve versie         | Beide teamleden hebben de volledige opdrachtchecklist afgevinkt; spelling, figuren, tabellen, links, scores en bronverwijzingen zijn gecontroleerd; definitieve bestanden staan klaar.                                                                                              |
+| **8 oktober** | Bestaande onderdelen herstellen en ontbrekende ensembles starten | Tijn: EDA/evaluatie, KNN-reviewpunten, SVM-voorbeeld en RF. Yorrick: LR/Tree-review en GBDT/XGBoost. Samen: grids op haalbare rekentijd controleren, pakketversies vastleggen en bronnen bijhouden. |
+| **9 oktober, overdag** | Verplichte modeluitwerkingen en trainingen afronden | Eigenaren leveren per model theorie, tuning, twee imbalance-aanpakken, beste parameters, CV-score, validatiemetrics en confusion matrix. Dure runs zijn gestart met voldoende tijd voor herstel. |
+| **9 oktober, einde dag** | Eigen ensemble en inhoudelijke conceptversie gereed | Tijn bouwt het ensemble van minimaal drie modellen; Yorrick motiveert samenstelling/voting en begint de vergelijking/conclusie. Alle verplichte secties hebben inhoud, geen lege placeholders. Ontbrekende resultaten worden expliciet gemarkeerd en uiterlijk de volgende ochtend aangevuld. |
+| **10 oktober, ochtend** | Resultaten, submissions, conclusie en bronnen compleet | Eigenaren registreren de laatste Kaggle-resultaten. Yorrick maakt vergelijkingstabel, advies en APA-lijst af; Tijn controleert parameters, scoreherkomst, AI-verwijzingen en uitvoerbaarheid. README actualiseren. Geen nieuwe vrijblijvende score-experimenten meer. |
+| **10 oktober, middag en avond** | Volledige uitvoering, onderlinge review en definitieve versie | Tijn draait het volledige notebook vanaf een schone kernel met benodigde Code-cellen; Yorrick controleert inhoud en opdrachtchecklist. Beide begrijpen alle onderdelen. Na correcties horen code, uitvoer, tekst en submissions bij dezelfde versie. |
 | **11 oktober, ruim voor de deadline** | Inleveren en verifiëren                   | Juiste notebookversie is ingeleverd, vereiste Kaggle-submission staat op naam van het team en de ontvangst/inleverstatus is gecontroleerd.                                                                                                                                          |
 
 ## Eisen per onderdeel
@@ -108,6 +141,7 @@ De eigenaar schrijft en test het onderdeel. De reviewer controleert de inhoud, c
 - Ieder model krijgt een inhoudelijke uitleg, reproduceerbare code, gestratificeerde cross-validation en hyperparametertuning.
 - Voor ieder model/ensemble worden minimaal twee passende technieken voor de ongebalanceerde target toegepast, uitgelegd en eerlijk vergeleken. Resampling vindt alleen binnen de trainingsfolds plaats.
 - De beste hyperparameters, gemiddelde CV-F1, validatieresultaten en confusion matrix worden vastgelegd.
+- Leg ook de gekozen beslisdrempel, gebruikte kans/beslissingsscore en pakketversies vast. De submission is aantoonbaar afkomstig uit de beschreven modelvariant; de drempel wordt niet gekozen op basis van verborgen Kaggle-labels of steeds op de public leaderboard afgestemd.
 - Het model met de beste gevonden hyperparameters wordt toegepast op `test.csv`; de eigen voorspellingen worden in het juiste submissionformaat op Kaggle getest en de score wordt genoteerd.
 - Iedere vergelijking gebruikt dezelfde splitsing/CV-opzet en dezelfde primaire metric, tenzij een afwijking expliciet wordt onderbouwd.
 
@@ -176,19 +210,23 @@ De eigenaar schrijft en test het onderdeel. De reviewer controleert de inhoud, c
 
 ## Eerstvolgende acties
 
-1. **Uiterlijk 26 september:** Yorrick reviewt 3.1 en 3.2. Controleer vooral de lekvrije CV, de beste parameters en scores, de ontbrekende uitleg van beide afstanden, de uitgecommentarieerde submissioncel en de opgeslagen uitvoer. Tijn verwerkt de bevindingen.
-2. Review 2.1–2.3 en de Logistic Regression-baseline: verwijder de placeholder in 2.1 en controleer metricberekeningen, confusion matrix en tekst.
-3. Tijn maakt de kolombeschrijvingen volledig, vult targetgerichte analyses en datakwaliteitschecks aan; Yorrick controleert de EDA-conclusies en keuzes over featureverwijdering.
-4. Start 3.3 Logistic Regression en 3.4 SVM volgens de werkverdeling. Gebruik de KNN-werkwijze als technisch voorbeeld, maar tune en beoordeel ieder model apart.
-5. Houd een gedeeld experimentlog bij met eigenaar, CV-instelling, imbalance-techniek, parameters, lokale F1, Kaggle-F1, submissionbestandsnaam en bewijs van de Kaggle-score van **0,13071**.
-6. Voeg bronnen en AI-prompts tijdens het schrijven toe. Gebruik `sample_submission.csv` alleen als formaatvoorbeeld; de labels in submissions moeten uit eigen modellen komen.
+1. **8 oktober — Tijn, review Yorrick:** afstandsformules/voorbeeld, submissionkoppeling en gedeelde functies zijn toegevoegd. Review nu 3.1/3.2 en controleer de echte modeluitvoer en nieuwe CSV na training. Verwijder ook de placeholder in 2.1 en controleer de baseline.
+2. **8–9 oktober — Yorrick, review Tijn:** controleer LR-regularisatie tegen de gebruikte pakketversie. Leg voor LR en Tree de echte beste parameters, CV/validatiemetrics en vergelijking van imbalance-technieken vast. Opnieuw trainen als de code/configuratie wijzigt.
+3. **8–9 oktober — Tijn, review Yorrick:** het SVM-rekenvoorbeeld en de formule-uitleg zijn aangevuld. Voer de volledige SVM-gridsearch uit, bekijk de resultaatuitvoer en confusion matrix en maak de nieuwe submission via de functie. Vul RF-resultaten aan en corrigeer de uitleg van kansmiddeling.
+4. **Uiterlijk 9 oktober — Yorrick:** werk GBDT en XGBoost uit. **Tijn en Yorrick:** maak daarna het eigen ensemble met minimaal drie modellen, gemotiveerde voting, CV, tuning en twee imbalance-aanpakken.
+5. **Uiterlijk 9 oktober — Tijn/Yorrick:** maak alle kolombeschrijvingen en targetgerichte EDA compleet. Toon noodzakelijke datakwaliteitschecks. Herzie te sterke conclusies over lage correlaties, woongebied en onbekende rookstatus; onbekend betekent niet automatisch nooit gerookt. Featurekeuzes mogen niet op de labels van de holdout worden afgestemd.
+6. **Uiterlijk 10 oktober, ochtend — ieder eigen modellen, Yorrick overzicht:** leg per variant parameters, drempel, CV-instelling, imbalance-techniek, lokale metrics, submissionbestandsnaam en Kaggle-score/bewijs vast. Rond hoofdstuk 4, bronnen, AI-prompts en README af. Gebruik `sample_submission.csv` uitsluitend als formaatvoorbeeld.
+7. **10 oktober — Tijn uitvoering, Yorrick review:** maak benodigde cellen uitvoerbaar en voer één volledige schone run uit. Controleer ook id-volgorde en 8.388 voorspellingen per submission, geen oude foutuitvoer, geen undefined variabelen en geen verschillen tussen gerapporteerde resultaten en code.
+8. **Alleen als bovenstaande af is:** onderzoek betere scores met kleine, vooraf gekozen CV-experimenten, bijvoorbeeld een lineaire SVM met undersampling en aangepaste `C`. Vergelijk op dezelfde CV-opzet; een lokale verbetering garandeert geen hogere Kaggle-score. De minimumscore is al gehaald.
 
 ## Belangrijkste risico's
 
-- **Omvang:** alleen KNN heeft nu een modeluitwerking en Kaggle-resultaat; Logistic Regression als volledig model, SVM, Decision Tree en de ensembles moeten nog worden gemaakt.
+- **Omvang en tijd:** LR, SVM en Tree zijn toegevoegd, maar GBDT, XGBoost, het eigen ensemble, conclusie en bronverantwoording zijn nog niet compleet. Verplichte inhoud en gecontroleerde resultaten gaan vóór extra scoreverbetering.
+- **Rekentijd:** uitgebreide grids met geneste drempeltuning kunnen uren duren. Raw-cellen voorkomen herhaald trainen tijdens het werken, maar vervangen geen definitieve uitvoering. Beperk zoekruimtes en start de eindrun tijdig.
+- **Versieafhankelijkheid:** LR-regularisatie kan anders werken dan bedoeld als `l1_ratio`, penalty en de pakketversie niet overeenkomen. Maak de configuratie expliciet en controleer waarschuwingen voordat resultaten worden overgenomen.
 - **Datalekken:** resampling en standaardisatie moeten binnen de cross-validation-pipeline gebeuren, niet vooraf op de volledige trainingsdata.
 - **Featureselectie op p-waarden:** de huidige woongebiedsectie verwijdert een feature omdat de chi-kwadraattoets niet significant is. Herzie dit besluit met voorspellende validatie; een niet-significante toets op associatie is op zichzelf geen bewijs dat een variabele de modelprestatie niet kan verbeteren.
-- **Verouderde notebookuitvoer:** de KNN-submissioncel is uitgecommentarieerd maar toont nog uitvoer van een eerdere run. Herstel die cel en voer het notebook na afronding van boven naar beneden opnieuw uit; controleer ook tabellen, conclusies en opgeschoonde features.
+- **Verouderde notebookuitvoer:** de submissioncellen zijn opgeschoond, maar andere opgeslagen uitvoer kan nog van eerdere runs zijn. De volledige grids zijn bij deze wijziging niet opnieuw uitgevoerd. Zorg bij de eindcontrole dat modelvariabelen, parameters, drempels, uitvoer en ingediende bestanden naar dezelfde variant verwijzen.
 - **Misleidende evaluatie:** door slechts 1,54% positieve gevallen is accuracy nauwelijks bruikbaar. Rapporteer minimaal precision, recall, F1 en de confusion matrix en bespreek de kosten van false negatives.
 - **Bronnen en AI:** ontbrekende verwijzingen kunnen volgens de opdracht als fraude worden gezien. Dit is een harde eis, geen afwerking voor het einde.
 - **Medische formulering:** presenteer het model als beslisondersteuning en niet als zelfstandig diagnostisch systeem; bespreek uitlegbaarheid, generaliseerbaarheid, bias en validatie op nieuwe data.
