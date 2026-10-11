@@ -7556,26 +7556,163 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Inhoudsopgave">Inhoudsopgave<a class="anchor-link" href="#Inhoudsopgave">¶</a></h2><ol>
-<li><a href="#1-exploratieve-data-analyse-eda--data-voorbewerking">Exploratieve Data Analyse (EDA) &amp; Data Voorbewerking</a><ul>
-<li><a href="#11-kolom-beschrijvingen">Kolom Beschrijvingen</a></li>
-<li><a href="#12-geschiktheid-van-de-data-voor-scikit-learn">Geschiktheid van de data voor Scikit-learn</a></li>
-<li><a href="#13-missende-waardes">Missende waardes</a></li>
-<li><a href="#14-basisstatistieken">Basisstatistieken</a></li>
-<li><a href="#15-verdelingen-numerieke-kolommen">Verdelingen Numerieke Kolommen</a></li>
-<li><a href="#16-verdeling-target-kolom-stroke">Verdeling Target Kolom (Stroke)</a></li>
-<li><a href="#17-correlaties-met-target-kolom">Correlaties met Target Kolom</a></li>
-<li><a href="#18-boxplots-outliers">Boxplots (Outliers)</a></li>
-<li><a href="#19-belangrijkste-bevindingen">Belangrijkste Bevindingen</a></li>
-<li><a href="#110-niet-relevante-kolommen">Niet relevante kolommen</a></li>
-<li><a href="#111-standaardisatie-van-de-data">Standaardisatie van de data</a></li>
+<h2 id="Inhoudsopgave">Inhoudsopgave<a class="anchor-link" href="#Inhoudsopgave">¶</a></h2><ul>
+<li><a href="#teamleden--kaggle-accounts">Teamleden &amp; Kaggle Accounts</a></li>
+<li><a href="#1-exploratieve-data-analyse-eda--data-voorbewerking">1. Exploratieve Data Analyse (EDA) &amp; Data Voorbewerking</a><ul>
+<li><a href="#eerst-splitsen-en-daarna-onderzoeken">Eerst splitsen en daarna onderzoeken</a></li>
+<li><a href="#11-kolom-beschrijvingen">1.1 Kolom Beschrijvingen</a></li>
+<li><a href="#12-geschiktheid-van-de-data-voor-scikit-learn">1.2 Geschiktheid van de data voor Scikit-learn</a></li>
+<li><a href="#13-missende-waardes">1.3 Missende waardes</a></li>
+<li><a href="#14-basisstatistieken">1.4 Basisstatistieken</a><ul>
+<li><a href="#141-numerieke-kolommen">1.4.1 Numerieke kolommen</a></li>
+<li><a href="#142-binaire-kolommen">1.4.2 Binaire Kolommen</a></li>
+<li><a href="#143-categorische-kolommen">1.4.3 Categorische Kolommen</a></li>
 </ul>
 </li>
-<li><a href="#2-evaluatie">Evaluatie</a></li>
-<li><a href="#3-modelleren-en-uitleg-modellen">Modelleren en uitleg modellen</a></li>
-<li><a href="#4-conclusie-en-advies">Conclusie en advies</a></li>
-<li><a href="#5-referentielijst-en-verantwoording-generatieve-ai">Referentielijst en verantwoording generatieve AI</a></li>
-</ol>
+<li><a href="#15-verdelingen-numerieke-kolommen">1.5 Verdelingen Numerieke Kolommen</a></li>
+<li><a href="#16-verdeling-target-kolom-stroke">1.6 Verdeling Target Kolom (Stroke)</a></li>
+<li><a href="#17-correlaties-met-target-kolom">1.7 Correlaties met Target Kolom</a><ul>
+<li><a href="#171-visualisatie">1.7.1 Visualisatie</a></li>
+</ul>
+</li>
+<li><a href="#18-boxplots-outliers">1.8 Boxplots (Outliers)</a></li>
+<li><a href="#19-belangrijkste-bevindingen">1.9 Belangrijkste Bevindingen</a><ul>
+<li><a href="#imbalanced-target">Imbalanced target</a></li>
+<li><a href="#geen-missende-waardes">Geen missende waardes</a></li>
+<li><a href="#age-heart_disease-avg_glucose_level-en-hypertension-zijn-de-meest-gecorreleerde-aan-stroke">Age, heart_disease, avg_glucose_level en hypertension zijn de meest gecorreleerde aan stroke</a></li>
+<li><a href="#zwakke-losse-correlaties-bepalen-niet-onze-featurekeuze">Zwakke losse correlaties bepalen niet onze featurekeuze</a></li>
+<li><a href="#uitschieters">Uitschieters</a></li>
+</ul>
+</li>
+<li><a href="#110-niet-relevante-kolommen">1.10 Niet relevante kolommen</a><ul>
+<li><a href="#1101-identificerende-kolom-id">1.10.1 Identificerende kolom (ID)</a></li>
+<li><a href="#1102-dubbele-one-hot-kolommen">1.10.2 Dubbele one-hot-kolommen</a></li>
+<li><a href="#conlusie">Conlusie</a></li>
+<li><a href="#1103-woongebied">1.10.3 Woongebied</a></li>
+<li><a href="#1104-zeldzame-categorie%C3%ABn">1.10.4 Zeldzame categorieën</a></li>
+<li><a href="#1105-rookstatus">1.10.5 Rookstatus</a></li>
+</ul>
+</li>
+<li><a href="#111-standaardisatie-van-de-data">1.11 Standaardisatie van de data</a><ul>
+<li><a href="#waarom-standaardiseren-voor-deze-dataset">Waarom standaardiseren voor deze dataset?</a></li>
+<li><a href="#gekozen-werkwijze">Gekozen werkwijze</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-evaluatie">2. Evaluatie</a><ul>
+<li><a href="#21-train--en-validatiestrategie">2.1 Train- en validatiestrategie</a></li>
+<li><a href="#22-evaluatiemetrics-en-confusion-matrix">2.2 Evaluatiemetrics en confusion matrix</a></li>
+<li><a href="#23-keuze-voor-de-f1-score">2.3 Keuze voor de F1-score</a></li>
+</ul>
+</li>
+<li><a href="#3-modelleren-en-uitleg-modellen">3. Modelleren en uitleg modellen</a><ul>
+<li><a href="#31-algemene-modelaanpak">3.1 Algemene modelaanpak</a><ul>
+<li><a href="#technieken-voor-de-ongebalanceerde-dataset">Technieken voor de ongebalanceerde dataset</a></li>
+<li><a href="#resultaten-en-submissions">Resultaten en submissions</a></li>
+</ul>
+</li>
+<li><a href="#32-k-nearest-neighbors">3.2 K-Nearest Neighbors</a><ul>
+<li><a href="#afstandsberekening">Afstandsberekening</a></li>
+<li><a href="#323-resultaten-en-interpretatie">3.2.3 Resultaten en interpretatie</a></li>
+<li><a href="#324-aanvullend-experiment-leeftijdsgewicht">3.2.4 Aanvullend experiment: leeftijdsgewicht</a></li>
+</ul>
+</li>
+<li><a href="#33-logistic-regression">3.3 Logistic Regression</a><ul>
+<li><a href="#331-werking">3.3.1 Werking</a></li>
+<li><a href="#332-rekenvoorbeeld">3.3.2 Rekenvoorbeeld</a></li>
+<li><a href="#333-regularisatie">3.3.3 Regularisatie</a></li>
+<li><a href="#334-resultaten-logistic-regression">3.3.4 Resultaten Logistic Regression</a></li>
+</ul>
+</li>
+<li><a href="#34-svm">3.4 SVM</a><ul>
+<li><a href="#341-werking">3.4.1 Werking</a></li>
+<li><a href="#hinge-loss">Hinge loss</a></li>
+<li><a href="#342-berekening-met-data">3.4.2 Berekening met data</a></li>
+<li><a href="#343-kernels">3.4.3 Kernels</a><ul>
+<li><a href="#linear">Linear</a></li>
+<li><a href="#polynomal">Polynomal</a></li>
+<li><a href="#rbf-radial-basis-function">RBF (Radial Basis Function)</a></li>
+<li><a href="#sigmoid">Sigmoid</a></li>
+</ul>
+</li>
+<li><a href="#344-resultaten-svm">3.4.4 Resultaten SVM</a></li>
+</ul>
+</li>
+<li><a href="#35-decision-tree">3.5 Decision Tree</a><ul>
+<li><a href="#werking">Werking</a></li>
+<li><a href="#criteria-voor-splitsingen">Criteria voor splitsingen</a></li>
+<li><a href="#hyperparameters">Hyperparameters</a></li>
+<li><a href="#pruning">Pruning</a></li>
+<li><a href="#toelichting">Toelichting:</a></li>
+<li><a href="#351-resultaten-decision-tree">3.5.1 Resultaten Decision Tree</a></li>
+</ul>
+</li>
+<li><a href="#36-ensembles">3.6 Ensembles</a><ul>
+<li><a href="#bagging-en-boosting">Bagging en boosting</a></li>
+<li><a href="#sequential-en-parallel">Sequential en parallel</a></li>
+<li><a href="#361-random-forest">3.6.1 Random Forest</a><ul>
+<li><a href="#werking-1">Werking</a></li>
+<li><a href="#bagging-en-bootstrap-aggregation">Bagging en Bootstrap Aggregation</a></li>
+<li><a href="#resultaten-random-forest">Resultaten Random Forest</a></li>
+</ul>
+</li>
+<li><a href="#362-gradient-boosted-decision-trees">3.6.2 Gradient Boosted Decision Trees</a><ul>
+<li><a href="#werking-en-boosting">Werking en boosting</a></li>
+<li><a href="#sequential-en-trainingstijd">Sequential en trainingstijd</a></li>
+<li><a href="#onze-keuzes">Onze keuzes</a></li>
+<li><a href="#resultaten-gbdt">Resultaten GBDT</a></li>
+</ul>
+</li>
+<li><a href="#363-xgboost">3.6.3 XGBoost</a><ul>
+<li><a href="#werking-en-regularisatie">Werking en regularisatie</a></li>
+<li><a href="#sequential-en-parallel-1">Sequential en parallel</a></li>
+<li><a href="#onze-keuzes-1">Onze keuzes</a></li>
+<li><a href="#resultaten-xgboost">Resultaten XGBoost</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#37-zelf-samengesteld-ensemble">3.7 Zelf samengesteld ensemble</a><ul>
+<li><a href="#371-werking-en-modelkeuze">3.7.1 Werking en modelkeuze</a></li>
+<li><a href="#soft-voting">Soft Voting</a></li>
+<li><a href="#372-training-en-optimalisatie">3.7.2 Training en optimalisatie</a></li>
+<li><a href="#evaluatie-en-submission-van-de-beste-stemgewichten">Evaluatie en submission van de beste stemgewichten</a></li>
+<li><a href="#373-resultaten-en-conclusie">3.7.3 Resultaten en conclusie</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-conclusie-en-advies">4. Conclusie en advies</a><ul>
+<li><a href="#41-vergelijking-van-modellen-en-ensembles">4.1 Vergelijking van modellen en ensembles</a><ul>
+<li><a href="#vergelijking-van-de-prestaties">Vergelijking van de prestaties</a></li>
+</ul>
+</li>
+<li><a href="#42-beste-model">4.2 Beste model</a></li>
+<li><a href="#43-overige-overwegingen">4.3 Overige overwegingen</a><ul>
+<li><a href="#false-positives-en-false-negatives">False positives en false negatives</a></li>
+<li><a href="#uitlegbaarheid">Uitlegbaarheid</a></li>
+<li><a href="#betrouwbaarheid-en-generaliseerbaarheid">Betrouwbaarheid en generaliseerbaarheid</a></li>
+<li><a href="#klasse-onbalans">Klasse-onbalans</a></li>
+<li><a href="#bias-en-representativiteit">Bias en representativiteit</a></li>
+<li><a href="#conclusie">Conclusie</a></li>
+</ul>
+</li>
+<li><a href="#44-advies-aan-artsen">4.4 Advies aan artsen</a></li>
+</ul>
+</li>
+<li><a href="#5-referentielijst-en-verantwoording-generatieve-ai">5. Referentielijst en verantwoording generatieve AI</a><ul>
+<li><a href="#main-codex-chat">Main codex chat:</a></li>
+<li><a href="#ai-ondersteuning-bij-pep8-opmaak">AI-ondersteuning bij PEP8-opmaak</a></li>
+<li><a href="#ai-ondersteuning-bij-uitvoerinstructies-en-dependencies">AI-ondersteuning bij uitvoerinstructies en dependencies</a></li>
+<li><a href="#losse-ai-chats">Losse AI chats:</a></li>
+<li><a href="#bronnen-standaardisatie">Bronnen standaardisatie</a></li>
+<li><a href="#bronnen-afstandsmaten-en-svm">Bronnen afstandsmaten en SVM</a></li>
+<li><a href="#bronnen-gbdt-en-xgboost">Bronnen GBDT en XGBoost</a></li>
+<li><a href="#aanvullende-bronnen-uit-de-cellen">Aanvullende bronnen uit de cellen</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
